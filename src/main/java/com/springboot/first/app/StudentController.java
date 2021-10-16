@@ -2,6 +2,7 @@ package com.springboot.first.app;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
@@ -30,6 +31,16 @@ public class StudentController {
     @GetMapping("/student/{firstName}/{lastName}")
     public Student studentPathVariable(@PathVariable("firstName") String firstName1,@PathVariable("lastName") String lastName){
         return new Student(firstName1,lastName);
+    }
+
+    // build rest api to handle query parameters
+    // http://localhost:8080/student?firstName=Bond&lastName=James
+
+    @GetMapping("/student/query")
+    public Student getStudentQueryParam(
+            @RequestParam(name = "firstName") String firstName,
+            @RequestParam(name="lastName") String lastName){
+        return new Student(firstName,lastName);
     }
 
 }
